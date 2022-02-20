@@ -1,2 +1,2 @@
-aiohttp
+aiohttp-client-cache
 fastapi

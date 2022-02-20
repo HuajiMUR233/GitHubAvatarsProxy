@@ -1,7 +1,7 @@
 import re
 
+from aiohttp_client_cache import CachedSession, SQLiteBackend
 import fastapi
-import aiohttp
 
 
 app = fastapi.FastAPI(
@@ -27,6 +27,6 @@ async def _(path: str):
         return fastapi.Response(status_code=404)
     url = base_url + path
     print("Getting {}".format(url))
-    async with aiohttp.ClientSession() as session:
+    async with CachedSession(cache=SQLiteBackend("avatars-cache", use_temp=True)) as session:
         async with session.get(url) as response:
             return fastapi.Response(await response.read(), status_code=response.status, headers=response.headers)
