@@ -1,2 +1,3 @@
 aiohttp-client-cache
 fastapi
+aiosqlite
