@@ -1,7 +1,6 @@
 import re
 
 import fastapi
-import fastapi.responses
 import aiohttp
 
 
@@ -16,11 +15,6 @@ path_formats = [
     re.compile(r"^\w+"),
     re.compile(r"^(\/*)u\/\d+$")
 ]
-
-
-@app.route("/")
-async def _():
-    return fastapi.responses.RedirectResponse("https://github.com")
 
 
 @app.get("/{path:path}")
