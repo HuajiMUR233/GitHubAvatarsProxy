@@ -1,6 +1,7 @@
 import re
 
 from aiohttp_client_cache import CachedSession, SQLiteBackend
+from fastapi.responses import RedirectResponse
 import fastapi
 
 
@@ -13,8 +14,13 @@ app = fastapi.FastAPI(
 base_url = "https://avatars.githubusercontent.com/"
 path_formats = [
     re.compile(r"^\w+"),
-    re.compile(r"^(\/*)u\/\d+$")
+    re.compile(r"^(/*)u/\d+$")
 ]
+
+
+@app.get("/")
+async def _():
+    return RedirectResponse("https://github.com/HuajiMUR233/GitHubAvatarsProxy")
 
 
 @app.get("/{path:path}")
